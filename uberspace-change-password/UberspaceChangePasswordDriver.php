@@ -104,5 +104,3 @@ class UberspaceChangePasswordDriver implements \RainLoop\Providers\ChangePasswor
 		return $value >= $minValue && $value <= $maxValue;
 	}
 }
-
-?>
