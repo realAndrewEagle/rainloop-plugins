@@ -61,7 +61,7 @@ class UberspaceChangePasswordDriver implements \RainLoop\Providers\ChangePasswor
 
 	private function IsDirectUberspaceDomain($domainName)
 	{
-		return $this->EndsWith(strtolower($domainName, ".uberspace.de")) &&
+		return $this->EndsWith(strtolower($domainName), ".uberspace.de") &&
 			$this->IsInRange(count(explode(".", $domainName)), 3, 4);
 	}
 
