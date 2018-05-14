@@ -74,7 +74,7 @@ class UberspaceChangePasswordDriver implements \RainLoop\Providers\ChangePasswor
 	{
 		$domains = [];
 
-		exec("uberspace-list-domains -m", $domainEntries);
+		exec("uberspace mail domain list", $domainEntries);
 
 		foreach ($domainEntries as $domainEntry)
 		{
