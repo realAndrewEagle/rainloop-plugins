@@ -74,7 +74,14 @@ class UberspaceChangePasswordDriver implements \RainLoop\Providers\ChangePasswor
 	{
 		$domains = [];
 
-		exec("uberspace-list-domains -m", $domainEntries);
+		if ($this->CommandExists("uberspace-list-domains"))
+		{
+			exec("uberspace-list-domains -m", $domainEntries);
+		}
+		elseif ($this->CommandExists("uberspace"))
+		{
+			exec("uberspace mail domain list", $domainEntries);
+		}
 
 		foreach ($domainEntries as $domainEntry)
 		{
@@ -102,5 +109,14 @@ class UberspaceChangePasswordDriver implements \RainLoop\Providers\ChangePasswor
 	private function IsInRange($value, $minValue, $maxValue)
 	{
 		return $value >= $minValue && $value <= $maxValue;
+	}
+
+	private function CommandExists($cmd)
+	{
+		$return = shell_exec(sprintf(
+			"command -v %s > /dev/null 2>&1 || { echo 1; exit 1; }",
+			escapeshellarg($cmd))
+		);
+		return !empty($return) ? $return : 0;
 	}
 }
